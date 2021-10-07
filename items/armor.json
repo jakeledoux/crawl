@@ -1,0 +1,482 @@
+[
+    {
+        "id": "hide-armor",
+        "name": "Hide Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 20,
+        "value": 50
+    },
+    {
+        "id": "skaal-coat",
+        "name": "Skaal Coat",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 26,
+        "value": 100
+    },
+    {
+        "id": "vampire-armor",
+        "name": "Vampire Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 25,
+        "value": 175
+    },
+    {
+        "id": "deathbrand-armor",
+        "name": "Deathbrand Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 39,
+        "value": 2433
+    },
+    {
+        "id": "iron-armor",
+        "name": "Iron Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 25,
+        "value": 125
+    },
+    {
+        "id": "wolf-armor",
+        "name": "Wolf Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 31,
+        "value": 55
+    },
+    {
+        "id": "steel-plate-armor",
+        "name": "Steel Plate Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 40,
+        "value": 625
+    },
+    {
+        "id": "steel-armor",
+        "name": "Steel Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 31,
+        "value": 275
+    },
+    {
+        "id": "orcish-armor",
+        "name": "Orcish Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 40,
+        "value": 1000
+    },
+    {
+        "id": "blades-armor",
+        "name": "Blades Armor",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 44,
+        "value": 400
+    },
+    {
+        "id": "fine-clothes",
+        "name": "Fine Clothes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 40
+    },
+    {
+        "id": "ragged-robes",
+        "name": "Ragged Robes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "ragged-clothes",
+        "name": "Ragged Clothes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "noble-clothes",
+        "name": "Noble Clothes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 100
+    },
+    {
+        "id": "refined-tunic",
+        "name": "Refined Tunic",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 100
+    },
+    {
+        "id": "redguard-clothes",
+        "name": "Redguard Clothes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 5
+    },
+    {
+        "id": "vampire-robes",
+        "name": "Vampire Robes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 5
+    },
+    {
+        "id": "wedding-dress",
+        "name": "Wedding Dress",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 50
+    },
+    {
+        "id": "emperors-robes",
+        "name": "Emperor's Robes",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 100
+    },
+    {
+        "id": "hide-helmet",
+        "name": "Hide Helmet",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 10,
+        "value": 25
+    },
+    {
+        "id": "helmet-of-the-old-gods",
+        "name": "Helmet of the Old Gods",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 12,
+        "value": 345
+    },
+    {
+        "id": "iron-helmet",
+        "name": "Iron Helmet",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 15,
+        "value": 60
+    },
+    {
+        "id": "steel-helmet",
+        "name": "Steel Helmet",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 17,
+        "value": 125
+    },
+    {
+        "id": "imperial-helmet",
+        "name": "Imperial Helmet",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 15,
+        "value": 50
+    },
+    {
+        "id": "jagged-crown",
+        "name": "The Jagged Crown",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 23,
+        "value": 5000
+    },
+    {
+        "id": "mage-hood",
+        "name": "Mage Hood",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "ragged-cap",
+        "name": "Ragged Cap",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "vampire-hood",
+        "name": "Vampire Hood",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "chefs-hat",
+        "name": "Chef's Hat",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "fine-hat",
+        "name": "Fine Hat",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 25
+    },
+    {
+        "id": "cowl",
+        "name": "Cowl",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "vampire-gloves",
+        "name": "Vampire Gloves",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "fur-bracers",
+        "name": "Fur Bracers",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 6,
+        "value": 10
+    },
+    {
+        "id": "cultist-gloves",
+        "name": "Cultist Gloves",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 7,
+        "value": 30
+    },
+    {
+        "id": "gauntlets-of-the-old-gods",
+        "name": "Gauntlets of the Old Gods",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 7,
+        "value": 592
+    },
+    {
+        "id": "gilded-wristguards",
+        "name": "Gilded Wristguards",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 7,
+        "value": 21
+    },
+    {
+        "id": "nightingale-gloves",
+        "name": "Nightingale Gloves",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 10,
+        "value": 1924
+    },
+    {
+        "id": "leather-bracers",
+        "name": "Leather Bracers",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 7,
+        "value": 25
+    },
+    {
+        "id": "shrouded-gloves",
+        "name": "Shrouded Gloves",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 8,
+        "value": 125
+    },
+    {
+        "id": "vampire-gauntlets",
+        "name": "Vampire Gauntlets",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 8,
+        "value": 25
+    },
+    {
+        "id": "iron-gauntlets",
+        "name": "Iron Gauntlets",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 11,
+        "value": 25
+    },
+    {
+        "id": "dragonplate-gauntlets",
+        "name": "Dragonplate Gauntlets",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 17,
+        "value": 425
+    },
+    {
+        "id": "dwarven-gauntlets",
+        "name": "Dwarven Gauntlets",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 13,
+        "value": 85
+    },
+    {
+        "id": "elven-boots",
+        "name": "Elven Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 9,
+        "value": 45
+    },
+    {
+        "id": "fur-shoes",
+        "name": "Fur Shoes",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 6,
+        "value": 4
+    },
+    {
+        "id": "leather-boots",
+        "name": "Leather Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 7,
+        "value": 25
+    },
+    {
+        "id": "glass-boots",
+        "name": "Glass Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 11,
+        "value": 190
+    },
+    {
+        "id": "dragonscale-boots",
+        "name": "Dragonscale Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 12,
+        "value": 300
+    },
+    {
+        "id": "imperial-boots",
+        "name": "Imperial Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 11,
+        "value": 20
+    },
+    {
+        "id": "wolf-boots",
+        "name": "Wolf Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 12,
+        "value": 11
+    },
+    {
+        "id": "steel-plate-boots",
+        "name": "Steel Plate Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 14,
+        "value": 125
+    },
+    {
+        "id": "ahzidals-boots",
+        "name": "Ahzidal's Boots of Waterwalking",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 14,
+        "value": 1125
+    },
+    {
+        "id": "fur-boots",
+        "name": "Fur-Lined Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 25
+    },
+    {
+        "id": "cultist-boots",
+        "name": "Cultist Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 25
+    },
+    {
+        "id": "footwraps",
+        "name": "Footwraps",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "ragged-boots",
+        "name": "Ragged Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 1
+    },
+    {
+        "id": "boots",
+        "name": "Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 5
+    },
+    {
+        "id": "vampire-boots",
+        "name": "Vampire Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 2
+    },
+    {
+        "id": "temple-priest-boots",
+        "name": "Temple Priest Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 25
+    },
+    {
+        "id": "pleated-shoes",
+        "name": "Pleated Shoes",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 25
+    }
+]

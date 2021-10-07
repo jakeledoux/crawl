@@ -1,0 +1,74 @@
+[
+    {
+        "id": "shiv",
+        "name": "Shiv",
+        "kind": "weapon",
+        "damage": 5,
+        "value": 5
+    },
+    {
+        "id": "iron-dagger",
+        "name": "Iron Dagger",
+        "kind": "weapon",
+        "damage": 4,
+        "value": 10
+    },
+    {
+        "id": "steel-dagger",
+        "name": "Steel Dagger",
+        "kind": "weapon",
+        "damage": 5,
+        "value": 18
+    },
+    {
+        "id": "nordic-dagger",
+        "name": "Nordic Dagger",
+        "kind": "weapon",
+        "damage": 8,
+        "value": 115
+    },
+    {
+        "id": "orcish-dagger",
+        "name": "Orcish Dagger",
+        "kind": "weapon",
+        "damage": 6,
+        "value": 30
+    },
+    {
+        "id": "wooden-sword",
+        "name": "Wooden Sword",
+        "kind": "weapon",
+        "damage": 2,
+        "value": 5
+    },
+    {
+        "id": "iron-sword",
+        "name": "Iron Sword",
+        "kind": "weapon",
+        "damage": 7,
+        "value": 25
+    },
+    {
+        "id": "steel-sword",
+        "name": "Steel Sword",
+        "kind": "weapon",
+        "damage": 8,
+        "value": 45
+    },
+    {
+        "id": "nordic-sword",
+        "name": "Nordic Sword",
+        "kind": "weapon",
+        "damage": 11,
+        "value": 290
+    },
+    {
+        "id": "dragonbone-sword",
+        "name": "Dragonbone Sword",
+        "kind": "weapon",
+        "damage": 15,
+        "value": 1500,
+        "rarity": "legendary"
+    }
+]
+

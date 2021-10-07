@@ -1,0 +1,46 @@
+[
+    {
+        "id": "minor-healing-potion",
+        "name": "Potion of Minor Healing",
+        "kind": "potion",
+        "value": 17,
+        "hp": 25
+    },
+    {
+        "id": "healing-potion",
+        "name": "Potion of Healing",
+        "kind": "potion",
+        "value": 36,
+        "hp": 50
+    },
+    {
+        "id": "plentiful-healing-potion",
+        "name": "Potion of Plentiful Healing",
+        "kind": "potion",
+        "value": 57,
+        "hp": 75
+    },
+    {
+        "id": "vigorous-healing-potion",
+        "name": "Potion of Vigorous Healing",
+        "kind": "potion",
+        "value": 79,
+        "hp": 100
+    },
+    {
+        "id": "extreme-healing-potion",
+        "name": "Potion of Extreme Healing",
+        "kind": "potion",
+        "value": 123,
+        "hp": 150
+    },
+    {
+        "id": "ultimate-healing-potion",
+        "name": "Potion of Ultimate Healing",
+        "kind": "potion",
+        "value": 251,
+        "hp": 9999999,
+        "rarity": "rare"
+    }
+]
+

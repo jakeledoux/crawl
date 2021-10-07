@@ -1,0 +1,43 @@
+[
+    {
+        "id": "elven-shield",
+        "name": "Elven Shield",
+        "kind": "armor",
+        "limb": "shield",
+        "value": 115,
+        "defense": 21
+    },
+    {
+        "id": "hide-shield",
+        "name": "Hide Shield",
+        "kind": "armor",
+        "limb": "shield",
+        "value": 25,
+        "defense": 15
+    },
+    {
+        "id": "dragonscale-shield",
+        "name": "Dragonscale Shield",
+        "kind": "armor",
+        "limb": "shield",
+        "value": 750,
+        "defense": 29
+    },
+    {
+        "id": "iron-shield",
+        "name": "Iron Shield",
+        "kind": "armor",
+        "limb": "shield",
+        "value": 60,
+        "defense": 20
+    },
+    {
+        "id": "daedric-shield",
+        "name": "Daedric Shield",
+        "kind": "armor",
+        "limb": "shield",
+        "value": 1600,
+        "defense": 36
+    }
+]
+

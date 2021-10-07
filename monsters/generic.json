@@ -1,0 +1,97 @@
+[
+    {
+        "id": "draugr",
+        "name": "Draugr",
+        "generic": true,
+        "max-level": 15
+    },
+    {
+        "id": "skeleton",
+        "name": "Skeleton",
+        "generic": true,
+        "max-level": 10
+    },
+    {
+        "id": "orc",
+        "name": "Orc",
+        "generic": true
+    },
+    {
+        "id": "dragon",
+        "name": "Dragon",
+        "generic": true,
+        "max-level": 75
+    },
+    {
+        "id": "yeti",
+        "name": "Yeti",
+        "generic": true
+    },
+    {
+        "id": "witch",
+        "name": "Witch",
+        "generic": true,
+        "max-level": 20
+    },
+    {
+        "id": "dark-wizard",
+        "name": "Dark Wizard",
+        "generic": true,
+        "max-level": 30
+    },
+    {
+        "id": "skeever",
+        "name": "Skeever",
+        "generic": true,
+        "max-level": 5
+    },
+    {
+        "id": "wolf",
+        "name": "Wolf",
+        "generic": true,
+        "max-level": 10
+    },
+    {
+        "id": "bear",
+        "name": "Bear",
+        "generic": true,
+        "max-level": 15
+    },
+    {
+        "id": "chaurus",
+        "name": "Chaurus",
+        "generic": true
+    },
+    {
+        "id": "spider",
+        "name": "Spider",
+        "generic": true,
+        "max-level": 10
+    },
+    {
+        "id": "frostbite-spider",
+        "name": "Frostbite Spider",
+        "generic": true,
+        "max-level": 15
+    },
+    {
+        "id": "netch",
+        "name": "Netch",
+        "generic": true
+    },
+    {
+        "id": "mudcrab",
+        "name": "Mudcrab",
+        "generic": true
+    },
+    {
+        "id": "scorpion",
+        "name": "Scorpion",
+        "generic": true
+    },
+    {
+        "id": "mammoth",
+        "name": "Mammoth",
+        "generic": true
+    }
+]
