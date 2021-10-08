@@ -52,6 +52,7 @@ impl Player {
                 ItemKind::Potion { hp } => hp,
                 _ => panic!("There should only ever be potions here."),
             });
+            potions.reverse();
 
             while self.dead() {
                 if let Some(potion) = potions.pop() {

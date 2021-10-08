@@ -17,7 +17,7 @@ const BASE_HP: u64 = 20;
 
 type RawInventory = HashMap<String, u32>;
 
-#[derive(Deserialize, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Deserialize, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[serde(rename_all = "lowercase")]
 pub enum Rarity {
     Petty,
@@ -61,6 +61,16 @@ impl Rarity {
             Self::Uncommon => 30..100,
             Self::Rare => 100..500,
             Self::Legendary => 500..1000,
+        }
+    }
+
+    pub fn from_level(level: u64) -> Self {
+        match level {
+            0..=9 => Self::Petty,
+            10..=29 => Self::Common,
+            30..=99 => Self::Uncommon,
+            100..=499 => Self::Rare,
+            _ => Self::Legendary,
         }
     }
 }
@@ -151,7 +161,7 @@ pub trait Level {
     fn add_xp(&mut self, amount: u64);
 
     fn level(&self) -> u64 {
-        ((self.xp() as f64).sqrt() / 100.0).round() as u64
+        ((self.xp() as f64).sqrt() / 8.0).round() as u64
     }
 
     fn hp(&self) -> u64 {

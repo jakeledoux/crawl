@@ -8,7 +8,8 @@ use std::path::Path;
 use super::{
     item::Item,
     monster::{Monster, PotentialMonster},
-    Inventory, RawInventory,
+    player::Player,
+    Inventory, Level, Rarity, RawInventory,
 };
 
 pub struct Stats {
@@ -21,6 +22,24 @@ impl Default for Stats {
         Self {
             caves: 0,
             monsters: 0,
+        }
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum CaveDifficulty {
+    Easy,
+    Hard,
+}
+
+impl CaveDifficulty {
+    pub fn random<R>(rng: &mut R) -> Self
+    where
+        R: Rng,
+    {
+        match rng.gen_bool(0.5) {
+            true => Self::Easy,
+            false => Self::Hard,
         }
     }
 }
@@ -108,7 +127,7 @@ impl World {
         Ok(self)
     }
 
-    pub fn new_cave<R>(&mut self, rng: &mut R) -> Cave
+    pub fn new_cave<R>(&mut self, player: &Player, rng: &mut R, difficulty: CaveDifficulty) -> Cave
     where
         R: Rng,
     {
@@ -122,19 +141,41 @@ impl World {
             .take(loot_count)
             .map(|item| (item, 1))
             .collect();
+
         // Generate gold
         let gold = rng.gen_range(0..200);
+
         // Generate monsters
         let mut monsters = Vec::new();
-        let monster_count = (rng.gen_range(0.0..1000_f64).sqrt() / 10.0) as u32;
-        for _ in 0..monster_count {
-            monsters.push(
-                self.monsters
-                    .values()
-                    .choose(rng)
-                    .expect("Monsters will not be empty.")
-                    .spawn(rng),
-            );
+
+        let player_max_rarity = Rarity::from_level(player.level());
+
+        if difficulty == CaveDifficulty::Easy {
+            let monster_count = (rng.gen_range(0.0..500_f64).sqrt() / 10.0) as u32;
+            let monster_options = self
+                .monsters
+                .values()
+                .filter(|monster| monster.rarity.unwrap_or(Rarity::Petty) <= player_max_rarity);
+            for _ in 0..monster_count {
+                monsters.push(
+                    monster_options
+                        .clone()
+                        .choose(rng)
+                        .expect("Monsters will not be empty.")
+                        .spawn(player_max_rarity, rng),
+                );
+            }
+        } else {
+            let monster_count = (rng.gen_range(0.0..1000_f64).sqrt() / 10.0) as u32;
+            for _ in 0..monster_count {
+                monsters.push(
+                    self.monsters
+                        .values()
+                        .choose(rng)
+                        .expect("Monsters will not be empty.")
+                        .spawn(Rarity::Legendary, rng),
+                );
+            }
         }
 
         Cave {

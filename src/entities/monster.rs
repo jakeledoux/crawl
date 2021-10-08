@@ -9,15 +9,20 @@ pub struct PotentialMonster {
     pub name: String,
     pub generic: bool,
     pub rarity: Option<Rarity>,
+    pub max_level: Option<u64>,
 }
 
 impl PotentialMonster {
-    pub fn spawn<R>(&self, rng: &mut R) -> Monster
+    pub fn spawn<R>(&self, mut max_rarity: Rarity, rng: &mut R) -> Monster
     where
         R: Rng,
     {
+        // Ensure max rarity does not exceed max level
+        if let Some(max_level) = self.max_level {
+            max_rarity = Rarity::from_level(max_level).min(max_rarity);
+        }
         #[allow(clippy::or_fun_call)]
-        let rarity = self.rarity.unwrap_or(Rarity::capped_random(rng, 3));
+        let rarity = self.rarity.unwrap_or(Rarity::random(rng).min(max_rarity));
         Monster {
             name: self.name.clone(),
             generic: self.generic,
@@ -67,7 +72,6 @@ impl Monster {
     {
         let min = (self.level / 10).max(2) as u64;
         let max = (self.level as u64).max(min + 1);
-        dbg!(min..max);
         rng.gen_range(min..max)
     }
 }
