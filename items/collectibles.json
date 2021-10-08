@@ -1,1 +1,368 @@
-[]
+[
+    {
+        "id": "wii-balance-board",
+        "name": "Wii Balance Board",
+        "kind": "collectible",
+        "value": 10
+    },
+    {
+        "id": "long-eyelash-potion",
+        "name": "Potion of Long Eyelashes",
+        "kind": "collectible",
+        "value": 100
+    },
+    {
+        "id": "itunes-gift-card",
+        "name": "$15 iTunes Gift Card",
+        "kind": "collectible",
+        "value": 15
+    },
+    {
+        "id": "pip-boy",
+        "name": "Pip-Boy",
+        "kind": "collectible",
+        "value": 300
+    },
+    {
+        "id": "hl3",
+        "name": "Half-Life 3",
+        "kind": "collectible",
+        "value": 60
+    },
+    {
+        "id": "wiimote",
+        "name": "Nintendo Wii Remote",
+        "kind": "collectible",
+        "value": 10
+    },
+    {
+        "id": "nds",
+        "name": "Nintendo DS",
+        "kind": "collectible",
+        "value": 35
+    },
+    {
+        "id": "iphone-4",
+        "name": "iPhone 4",
+        "kind": "collectible",
+        "value": 60
+    },
+    {
+        "id": "indiana-jones-dvd",
+        "name": "Indiana Jones and the Kingdom of the Crystal Skull DVD",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "guns-n-roses-poster",
+        "name": "Guns n' Roses Poster",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "james-bond-poster",
+        "name": "James Bond Poster",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "dice-set",
+        "name": "Dice Set",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "pokemon-card-collection",
+        "name": "Pokemon Card Collection",
+        "kind": "collectible",
+        "value": 20
+    },
+    {
+        "id": "diamond-ring",
+        "name": "Diamond Ring",
+        "kind": "collectible",
+        "value": 500
+    },
+    {
+        "id": "ruby-necklace",
+        "name": "Ruby Necklace",
+        "kind": "collectible",
+        "value": 500
+    },
+    {
+        "id": "gold-bar",
+        "name": "Gold Bar",
+        "kind": "collectible",
+        "value": 500
+    },
+    {
+        "id": "guitar-pick",
+        "name": "Guitar Pick",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "crown",
+        "name": "Crown",
+        "kind": "collectible",
+        "value": 500
+    },
+    {
+        "id": "tv-remote",
+        "name": "TV Remote",
+        "kind": "collectible",
+        "value": 10
+    },
+    {
+        "id": "socks",
+        "name": "Someone's Dirty Socks",
+        "kind": "collectible",
+        "value": 0
+    },
+    {
+        "id": "french-horn",
+        "name": "French Horn",
+        "kind": "collectible",
+        "value": 120
+    },
+    {
+        "id": "moldy-pizza",
+        "name": "Moldy Pizza",
+        "kind": "collectible",
+        "value": 0
+    },
+    {
+        "id": "soda-can",
+        "name": "Soda Can",
+        "kind": "collectible",
+        "value": 0
+    },
+    {
+        "id": "cat-figurine",
+        "name": "Cat Figurine",
+        "kind": "collectible",
+        "value": 2
+    },
+       {
+        "id": "spatula",
+        "name": "Spatula",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "toilet-seat",
+        "name": "Toilet Seat",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "toothpaste",
+        "name": "Toothpaste",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "toothbrush",
+        "name": "Toothbrush",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "mondays-coffee-mug",
+        "name": "\"I Hate Mondays\" Coffee Mug",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "garden-gnome",
+        "name": "Garden Gnome",
+        "kind": "collectible",
+        "value": 10
+    },
+    {
+        "id": "rusty-spoon",
+        "name": "Rusty Spoon",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "poker-chip",
+        "name": "Poker Chip",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "rubber-duck",
+        "name": "Rubber Duck",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "silly-putty",
+        "name": "Silly Putty",
+        "kind": "collectible",
+        "value": 5
+    },
+        {
+        "id": "winning-lottery-ticket",
+        "name": "Winning Lottery Ticket",
+        "kind": "collectible",
+        "value": 2
+    },
+    {
+        "id": "jason-voorhees-toy",
+        "name": "Jason Voorhees Toy",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "harry-potter-book-collection",
+        "name": "Harry Potter Book Collection",
+        "kind": "collectible",
+        "value": 50
+    },
+    {
+        "id": "lucky-charms",
+        "name": "Box of Lucky Charms Cereal",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "old-spice",
+        "name": "Old Spice Deodorant",
+        "kind": "collectible",
+        "value": 2
+    },
+    {
+        "id": "fifa-07",
+        "name": "FIFA 07 for Xbox 360",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "spongebob-squarepants-dvd",
+        "name": "Spongebob Squarepants Movie DVD",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "samsung-galaxy-s3",
+        "name": "Samsung Galaxy S3",
+        "kind": "collectible",
+        "value": 50
+    },
+    {
+        "id": "tom-nook-plushie",
+        "name": "Tom Nook Plushie",
+        "kind": "collectible",
+        "value": 10
+    },
+    {
+        "id": "skype-for-dummies-book",
+        "name": "Skype for Dummies Book",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "darth-vader-minifigure",
+        "name": "Darth Vader Minifigure",
+        "kind": "collectible",
+        "value": 20
+    },
+    {
+        "id": "beanie-baby",
+        "name": "Beanie Baby",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "toy-story-3-dvd",
+        "name": "Toy Story 3 DVD",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "pink-floyd-dsotm-cd",
+        "name": "Pink Floyd Dark Side of the Moon CD",
+        "kind": "collectible",
+        "value": 2
+    },
+    {
+        "id": "foam-minecraft-diamond-sword",
+        "name": "Foam Minecraft Diamond Sword",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "hot-wheels-delorean",
+        "name": "Hot Wheels Delorean",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "pokemon-fire-red-version",
+        "name": "Pokemon Fire Red Version",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "signed-eminem-photo",
+        "name": "Signed Eminem Photo",
+        "kind": "collectible",
+        "value": 5
+    },
+        {
+        "id": "toyota-camry-key",
+        "name": "2004 Toyota Camry Key",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "xbox-360-kinect-sensor",
+        "name": "Xbox 360 Kinect Sensor",
+        "kind": "collectible",
+        "value": 15
+    },
+    {
+        "id": "death-note",
+        "name": "Death Note",
+        "kind": "collectible",
+        "value": 30
+    },
+    {
+        "id": "pikachu-plushie",
+        "name": "Pikachu Plushie",
+        "kind": "collectible",
+        "value": 5
+    },
+    {
+        "id": "toy-lightsaber",
+        "name": "Toy Lightaber",
+        "kind": "collectible",
+        "value": 3
+    },
+    {
+        "id": "blockbuster-membership-card",
+        "name": "Blockbuster Membership Card",
+        "kind": "collectible",
+        "value": 1
+    },
+    {
+        "id": "airpods",
+        "name": "AirPods",
+        "kind": "collectible",
+        "value": 40
+    },
+    {
+        "id": "airpods-max",
+        "name": "AirPods Max",
+        "kind": "collectible",
+        "value": 45
+    },
+    {
+        "id": "gunship-cassette",
+        "name": "Golden Gunship Cassette",
+        "kind": "collectible",
+        "value": 250
+    }
+]

@@ -68,6 +68,46 @@
         "kind": "weapon",
         "damage": 15,
         "value": 1500,
+        "rarity": "rare"
+    },
+    {
+        "id": "master-sword",
+        "name": "Maste Sword",
+        "kind": "weapon",
+        "damage": 12,
+        "value": 3000,
+        "rarity": "rare"
+    },
+    {
+        "id": "desert-eagle",
+        "name": "Desert Eagle",
+        "kind": "weapon",
+        "damage": 500,
+        "value": 1900,
+        "rarity": "rare"
+    },
+    {
+        "id": "lightsaber-red",
+        "name": "Red Lightsaber",
+        "kind": "weapon",
+        "damage": 1000,
+        "value": 10000,
+        "rarity": "legendary"
+    },
+    {
+        "id": "lightsaber-red",
+        "name": "Red Lightsaber",
+        "kind": "weapon",
+        "damage": 1000,
+        "value": 10000,
+        "rarity": "legendary"
+    },
+    {
+        "id": "lightsaber-blue",
+        "name": "Blue Lightsaber",
+        "kind": "weapon",
+        "damage": 1000,
+        "value": 10000,
         "rarity": "legendary"
     }
 ]

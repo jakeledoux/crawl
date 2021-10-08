@@ -478,5 +478,245 @@
         "limb": "feet",
         "defense": 0,
         "value": 25
+    },
+    {
+        "id": "jumping-sneakers",
+        "name": "Sneakers of High Jumping",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 2,
+        "value": 250
+    },
+    {
+        "id": "matrix-sunglasses",
+        "name": "Neo's Sunglasses from The Matrix (1999)",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 12
+    },
+    {
+        "id": "matrix-trench-coat",
+        "name": "Neo's Trench Coat from The Matrix (1999)",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 5,
+        "value": 120
+    },
+    {
+        "id": "rollerskates",
+        "name": "Rollerskates",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 2,
+        "value": 20
+    },
+    {
+        "id": "heelys",
+        "name": "Heelys",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 2,
+        "value": 15
+    },
+    {
+        "id": "pompadour",
+        "name": "Pompadour Wig",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 5
+    },
+    {
+        "id": "wrist-dagger",
+        "name": "Assassin's Creed Wrist Dagger Replica",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 0,
+        "value": 50
+    },
+    {
+        "id": "xray-glasses",
+        "name": "X-Ray Glasses",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 75
+    },
+    {
+        "id": "tapout-backpack",
+        "name": "Tapout Backpack",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 12
+    },
+    {
+        "id": "tfs-tee",
+        "name": "Tears for Fears T-Shirt",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 15
+    },
+    {
+        "id": "skyrim-helmet",
+        "name": "That One Helmet from Skyrim",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 15,
+        "value": 15
+    },
+    {
+        "id": "mad-max-goggles",
+        "name": "Mad Max Goggles",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 15
+    },
+    {
+        "id": "cat-fur-coat",
+        "name": "Cat's Fur-Trimmed Trenchcoat",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 2,
+        "value": 30
+    },
+    {
+        "id": "fuzz-boots",
+        "name": "Fuzz Boots",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 2,
+        "value": 5
+    },
+    {
+        "id": "jean-jacket",
+        "name": "Jean Jacket",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 3,
+        "value": 15
+    },
+    {
+        "id": "spike-collar",
+        "name": "Spike Collar",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 1,
+        "value": 7
+    },
+    {
+        "id": "ninja-costume",
+        "name": "Ninja Costume",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 30
+    },
+    {
+        "id": "pirate-hat",
+        "name": "Pirate Hat",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 0,
+        "value": 5
+    },
+    {
+        "id": "leather-gloves",
+        "name": "Leather Gloves",
+        "kind": "armor",
+        "limb": "hands",
+        "defense": 1,
+        "value": 10
+    },
+    {
+        "id": "stormtrooper-helmet",
+        "name": "Stormtrooper Helmet",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 2,
+        "value": 75
+    },
+    {
+        "id": "dragon-costume",
+        "name": "Dragon Costume",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 1,
+        "value": 30
+    },
+    {
+        "id": "crown-of-the-forest",
+        "name": "Crown of the Forest",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 4,
+        "value": 300
+    },
+    {
+        "id": "hockey-mask",
+        "name": "Hockey Mask",
+        "kind": "armor",
+        "limb": "head",
+        "defense": 2,
+        "value": 10
+    },
+    {
+        "id": "clown-costume",
+        "name": "Clown Costume",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 25
+    },
+    {
+        "id": "ninja-turtle-costume",
+        "name": "Ninja Turtle Costume",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 0,
+        "value": 45
+    },
+    {
+        "id": "flip-flops",
+        "name": "Flip-Flops",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 3
+    },
+    {
+        "id": "gunship-tee-shirt",
+        "name": "Gunship T-Shirt",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 2,
+        "value": 30
+    },
+    {
+        "id": "gunship-varsity-jacket",
+        "name": "Gunship Varsity Jacket",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 3,
+        "value": 75
+    },
+    {
+        "id": "assless-chaps",
+        "name": "Assless Chaps",
+        "kind": "armor",
+        "limb": "body",
+        "defense": 2,
+        "value": 40
+    },
+    {
+        "id": "hello-kitty-socks",
+        "name": "Hello Kitty Socks",
+        "kind": "armor",
+        "limb": "feet",
+        "defense": 0,
+        "value": 7
     }
 ]
