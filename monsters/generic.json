@@ -58,11 +58,6 @@
         "max-level": 15
     },
     {
-        "id": "chaurus",
-        "name": "Chaurus",
-        "generic": true
-    },
-    {
         "id": "spider",
         "name": "Spider",
         "generic": true,
