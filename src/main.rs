@@ -25,7 +25,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut rng = rand::thread_rng();
 
     loop {
-        game::show_status(&mut world, &mut player, &mut term);
+        game::show_status(&world, &player, &mut term);
         let result = game::enter_cave(&mut world, &mut player, &mut rng, &mut term);
         if let game::CaveResult::Survived { reward } = result {
             game::show_cave_reward(&mut world, &mut player, reward, &mut term);

@@ -69,11 +69,7 @@ pub struct World {
 
 impl World {
     pub fn new() -> Self {
-        World {
-            items: HashMap::new(),
-            monsters: HashMap::new(),
-            stats: Stats::default(),
-        }
+        Self::default()
     }
 
     pub fn items(&self) -> &HashMap<String, Item> {
@@ -185,6 +181,16 @@ impl World {
             loot,
             gold,
             monsters,
+        }
+    }
+}
+
+impl Default for World {
+    fn default() -> Self {
+        World {
+            items: HashMap::new(),
+            monsters: HashMap::new(),
+            stats: Stats::default(),
         }
     }
 }

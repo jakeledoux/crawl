@@ -2,6 +2,7 @@ use rand::Rng;
 use serde::Deserialize;
 
 use std::collections::HashMap;
+use std::fmt;
 use std::ops::Range;
 
 pub mod item;
@@ -15,6 +16,17 @@ pub use world::*;
 const BASE_HP: u64 = 20;
 
 type RawInventory = HashMap<String, u32>;
+
+#[derive(Debug)]
+pub struct ItemError {}
+
+impl fmt::Display for ItemError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "ItemError")
+    }
+}
+
+impl std::error::Error for ItemError {}
 
 #[derive(Deserialize, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[serde(rename_all = "lowercase")]
@@ -121,7 +133,7 @@ pub trait Inventory {
         self.inventory().get(item).copied()
     }
 
-    fn remove_item(&mut self, item: &str) -> Result<(), ()> {
+    fn remove_item(&mut self, item: &str) -> Result<(), ItemError> {
         let inventory = self.mut_inventory();
         if let Some(amount) = inventory.get_mut(item) {
             if *amount > 1 {
@@ -131,7 +143,7 @@ pub trait Inventory {
             }
             Ok(())
         } else {
-            Err(())
+            Err(ItemError {})
         }
     }
 

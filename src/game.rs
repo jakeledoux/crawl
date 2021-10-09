@@ -29,8 +29,8 @@ where
     // Cave
     let harder_cave_difficulty = CaveDifficulty::random(rng);
     let mut caves = vec![
-        world.new_cave(&player, rng, CaveDifficulty::Easy),
-        world.new_cave(&player, rng, harder_cave_difficulty),
+        world.new_cave(player, rng, CaveDifficulty::Easy),
+        world.new_cave(player, rng, harder_cave_difficulty),
     ];
     caves.shuffle(rng); // Necessary so that the easy cave isn't always on the left and vice-versa
     let choice = get_choice(
@@ -60,11 +60,11 @@ where
                 println!("You slay it before it has a chance to attack!");
             } else {
                 let damage = monster.damage(rng);
-                let applied_damage = player.add_damage(damage, &world);
+                let applied_damage = player.add_damage(damage, world);
                 println!("It attacks and you take {} damage!", applied_damage);
 
                 // Attempt to heal
-                if let Some(potions_used) = player.auto_heal(&world) {
+                if let Some(potions_used) = player.auto_heal(world) {
                     for potion in potions_used {
                         println!(
                             "You used {}",
@@ -183,7 +183,7 @@ pub fn show_death_screen(world: &World, player: &Player, term: &mut Term) {
         "That leaves you with a final level of {} ({} xp) and a net worth of {} gold.",
         player.level().commas(),
         player.xp().commas(),
-        player.net_worth(&world).commas(),
+        player.net_worth(world).commas(),
     );
 
     loop {

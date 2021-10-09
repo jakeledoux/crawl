@@ -46,9 +46,9 @@ impl Comma for i64 {}
 /// Asks the user to type one of N choices.
 pub fn read_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usize {
     term.write_line(&format!("{} ({})", prompt, choices.join(", ")))
-        .expect("Failed to write to terminal");
+        .unwrap();
     loop {
-        term.write(b"? ").expect("Failed to write to terminal");
+        term.write_all(b"? ").unwrap();
         if let Ok(mut input) = term.read_line() {
             input = input.trim().to_lowercase();
             if let Some(index) = choices.iter().position(|&option| option == input) {
@@ -61,22 +61,20 @@ pub fn read_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> us
 
 /// Prompts the user with a menu to select one of N choices.
 pub fn get_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usize {
-    term.write_line(prompt)
-        .expect("Failed to write to terminal");
+    term.write_line(prompt).unwrap();
 
     let mut selection = 0;
     let last_index = choices.len() - 1;
-    term.hide_cursor().expect("Failed to hide cursor");
+    term.hide_cursor().unwrap();
     loop {
         for (index, option) in choices.iter().enumerate() {
             let prefix = if index == selection { '>' } else { ' ' };
-            term.write_line(&format!("{} {}", prefix, option))
-                .expect("Failed to write to terminal");
+            term.write_line(&format!("{} {}", prefix, option)).unwrap();
         }
 
-        match term.read_key().expect("Failed to read key") {
+        match term.read_key().unwrap() {
             Key::Enter | Key::Char('e') => {
-                term.show_cursor().expect("Failed to show cursor");
+                term.show_cursor().unwrap();
                 break selection;
             }
             Key::ArrowUp | Key::Char('w') => selection = selection.saturating_sub(1),
@@ -85,15 +83,14 @@ pub fn get_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usi
             Key::End => selection = last_index,
             _ => {}
         }
-        term.clear_last_lines(choices.len())
-            .expect("Failed to clear lines");
+        term.clear_last_lines(choices.len()).unwrap();
     }
 }
 
 // Prompts the user to press any key to continue
 pub fn wait_any_key(term: &mut Term) {
-    term.hide_cursor().expect("Failed to hide cursor");
-    term.write_line("Press any key to continue...");
-    term.read_key();
-    term.show_cursor().expect("Failed to show cursor");
+    term.hide_cursor().unwrap();
+    term.write_line("Press any key to continue...").unwrap();
+    term.read_key().unwrap();
+    term.show_cursor().unwrap();
 }
