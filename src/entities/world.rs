@@ -49,7 +49,6 @@ pub struct Cave {
     pub gold: u64,
     pub monsters: Vec<Monster>,
     // TODO: name: String
-    // TODO: kind: CaveKind
 }
 
 impl Inventory for Cave {
@@ -133,14 +132,18 @@ impl World {
     {
         // Generate loot
         let loot_count = rng.gen_range(1..5);
-        let mut loot = self.item_ids();
-        // TODO: use sample_iter() to allow for duplicate loot
-        loot.shuffle(rng);
-        let loot = loot
-            .into_iter()
-            .take(loot_count)
-            .map(|item| (item, 1))
-            .collect();
+        let loot = self.item_ids();
+        // TODO: Consider whether loot rarity scaling is more fun/rewarding
+        let loot =
+            loot.choose_multiple(rng, loot_count)
+                .fold(HashMap::new(), |mut loot_map, item| {
+                    if let Some(item_count) = loot_map.get_mut(item) {
+                        *item_count += 1
+                    } else {
+                        loot_map.insert(item.clone(), 1);
+                    }
+                    loot_map
+                });
 
         // Generate gold
         let gold = rng.gen_range(0..200);

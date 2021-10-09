@@ -1,7 +1,6 @@
 use super::{item::ItemKind, *};
 
 pub struct Player {
-    name: String,
     xp: u64,
     damage: u64,
     gold: u64,
@@ -9,19 +8,12 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(name: &str) -> Self {
-        Player {
-            name: name.to_owned(),
-            ..Default::default()
-        }
-    }
-
-    pub fn name(&self) -> &String {
-        &self.name
-    }
-
     pub fn damage(&self) -> u64 {
         self.damage
+    }
+
+    pub fn hp_remaining(&self) -> u64 {
+        self.hp().saturating_sub(self.damage)
     }
 
     pub fn add_damage(&mut self, amount: u64, world: &World) -> u64 {
@@ -60,7 +52,8 @@ impl Player {
                         ItemKind::Potion { hp } => hp,
                         _ => panic!("There should only ever be potions here."),
                     });
-                    self.remove_item(potion.id());
+                    self.remove_item(potion.id())
+                        .expect("Potion will still exist.");
                     potions_used.push(potion.id().to_owned());
                 } else {
                     break;
@@ -98,7 +91,6 @@ impl Player {
 impl Default for Player {
     fn default() -> Self {
         Player {
-            name: String::from("Unnamed"),
             xp: 0,
             damage: 0,
             gold: 0,

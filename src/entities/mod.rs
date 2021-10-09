@@ -2,7 +2,6 @@ use rand::Rng;
 use serde::Deserialize;
 
 use std::collections::HashMap;
-use std::error::Error;
 use std::ops::Range;
 
 pub mod item;
@@ -105,9 +104,13 @@ pub trait Inventory {
             .collect()
     }
 
+    fn item_count(&self) -> u32 {
+        self.inventory().values().sum()
+    }
+
     fn add_item(&mut self, item: &str) {
-        let mut inventory = self.mut_inventory();
-        if let Some(mut amount) = inventory.get_mut(item) {
+        let inventory = self.mut_inventory();
+        if let Some(amount) = inventory.get_mut(item) {
             *amount += 1;
         } else {
             inventory.insert(item.to_string(), 1);
@@ -119,8 +122,8 @@ pub trait Inventory {
     }
 
     fn remove_item(&mut self, item: &str) -> Result<(), ()> {
-        let mut inventory = self.mut_inventory();
-        if let Some(mut amount) = inventory.get_mut(item) {
+        let inventory = self.mut_inventory();
+        if let Some(amount) = inventory.get_mut(item) {
             if *amount > 1 {
                 *amount -= 1;
             } else {
