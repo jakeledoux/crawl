@@ -56,13 +56,13 @@ use interface::Comma;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut world = World::new()
-        .with_load_monsters("monsters/generic.json")?
-        .with_load_monsters("monsters/unique.json")?
-        .with_load_items("items/armor.json")?
-        .with_load_items("items/shields.json")?
-        .with_load_items("items/collectibles.json")?
-        .with_load_items("items/potions.json")?
-        .with_load_items("items/weapons.json")?;
+        .with_load_monsters("data/monsters/generic.json")?
+        .with_load_monsters("data/monsters/unique.json")?
+        .with_load_items("data/items/armor.json")?
+        .with_load_items("data/items/shields.json")?
+        .with_load_items("data/items/collectibles.json")?
+        .with_load_items("data/items/potions.json")?
+        .with_load_items("data/items/weapons.json")?;
     let mut player = Player::default();
     let mut rng = rand::thread_rng();
 
