@@ -2,6 +2,7 @@ use std::fmt::Display;
 use std::io::Write;
 
 use console::{Key, Term};
+use hottext::HotText;
 
 pub trait Comma
 where
@@ -43,13 +44,31 @@ impl Comma for i16 {}
 impl Comma for i32 {}
 impl Comma for i64 {}
 
+pub struct Context {
+    pub hottext: HotText<rand::rngs::ThreadRng>,
+    pub term: Term,
+    pub rng: rand::rngs::ThreadRng,
+}
+
+impl Default for Context {
+    fn default() -> Self {
+        Self {
+            hottext: HotText::default(),
+            term: Term::stdout(),
+            rng: rand::thread_rng(),
+        }
+    }
+}
+
 /// Asks the user to type one of N choices.
-pub fn read_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usize {
-    term.write_line(&format!("{} ({})", prompt, choices.join(", ")))
+pub fn read_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
+    context
+        .term
+        .write_line(&format!("{} ({})", prompt, choices.join(", ")))
         .unwrap();
     loop {
-        term.write_all(b"? ").unwrap();
-        if let Ok(mut input) = term.read_line() {
+        context.term.write_all(b"? ").unwrap();
+        if let Ok(mut input) = context.term.read_line() {
             input = input.trim().to_lowercase();
             if let Some(index) = choices.iter().position(|&option| option == input) {
                 break index;
@@ -60,21 +79,24 @@ pub fn read_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> us
 }
 
 /// Prompts the user with a menu to select one of N choices.
-pub fn get_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usize {
-    term.write_line(prompt).unwrap();
+pub fn get_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
+    context.term.write_line(prompt).unwrap();
 
     let mut selection = 0;
     let last_index = choices.len() - 1;
-    term.hide_cursor().unwrap();
+    context.term.hide_cursor().unwrap();
     loop {
         for (index, option) in choices.iter().enumerate() {
             let prefix = if index == selection { '>' } else { ' ' };
-            term.write_line(&format!("{} {}", prefix, option)).unwrap();
+            context
+                .term
+                .write_line(&format!("{} {}", prefix, option))
+                .unwrap();
         }
 
-        match term.read_key().unwrap() {
+        match context.term.read_key().unwrap() {
             Key::Enter | Key::Char('e') => {
-                term.show_cursor().unwrap();
+                context.term.show_cursor().unwrap();
                 break selection;
             }
             Key::ArrowUp | Key::Char('w') => selection = selection.saturating_sub(1),
@@ -83,14 +105,17 @@ pub fn get_choice<'a>(term: &mut Term, prompt: &str, choices: &[&'a str]) -> usi
             Key::End => selection = last_index,
             _ => {}
         }
-        term.clear_last_lines(choices.len()).unwrap();
+        context.term.clear_last_lines(choices.len()).unwrap();
     }
 }
 
-// Prompts the user to press any key to continue
-pub fn wait_any_key(term: &mut Term) {
-    term.hide_cursor().unwrap();
-    term.write_line("Press any key to continue...").unwrap();
-    term.read_key().unwrap();
-    term.show_cursor().unwrap();
+/// Prompts the user to press any key to continue
+pub fn wait_any_key(context: &mut Context) {
+    context.term.hide_cursor().unwrap();
+    context
+        .term
+        .write_line("Press any key to continue...")
+        .unwrap();
+    context.term.read_key().unwrap();
+    context.term.show_cursor().unwrap();
 }

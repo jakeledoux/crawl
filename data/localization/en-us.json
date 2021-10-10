@@ -1,0 +1,31 @@
+{
+    "lingo.experience": ["xp"],
+    "lingo.gold": ["gold"],
+    "interface.type-prompt": ["? "],
+    "interface.invalid-choice": ["That's not a valid choice."],
+    "interface.view-inventory": ["view inventory"],
+    "interface.leaderboards": ["leaderboards"],
+    "interface.exit": ["exit"],
+    "interface.post-game-menu": ["What do you want to do?"],
+    "caves.names": [
+        "Blairlock's Den",
+        "The Old Mines",
+        "Ventriloquist's Lair",
+        "Dino-Dan's Tunnel Network",
+        "Montshire Cavern"
+    ],
+    "caves.approach": ["You approach two caves. Which do you enter?"],
+    "caves.enter": ["You enter {{{cave}}}..."],
+    "combat.no-enemies": ["Sweet, no monsters here!"],
+    "combat.encounter": [
+        "Uh oh, it's {{{enemy}}}!",
+        "Zoinks! It's {{{enemy}}}!",
+        "You see {{{enemy}}}! Things just got interesting."
+    ],
+    "combat.initiative": ["You slay it before it has a chance to attack."],
+    "combat.attacked": ["It attacks and you take {{{damage}}} damage!"],
+    "combat.reward": ["You got..."],
+    "potion.use": ["You used your {{{potion}}}."],
+    "combat.died": ["You have died."],
+    "combat.game-over": ["Game over."]
+}

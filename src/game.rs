@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use console::Term;
+use hottext::{fmt_line, get_line};
 use rand::prelude::*;
 
 use super::entities::{player::Player, CaveDifficulty, World, *};
@@ -17,29 +17,32 @@ pub enum CaveResult {
     Died,
 }
 
-pub fn enter_cave<R>(
-    world: &mut World,
-    player: &mut Player,
-    rng: &mut R,
-    term: &mut Term,
-) -> CaveResult
-where
-    R: Rng,
-{
+pub fn enter_cave(world: &mut World, player: &mut Player, context: &mut Context) -> CaveResult {
     // Cave
-    let harder_cave_difficulty = CaveDifficulty::random(rng);
+    let harder_cave_difficulty = CaveDifficulty::random(&mut context.rng);
     let mut caves = vec![
-        world.new_cave(player, rng, CaveDifficulty::Easy),
-        world.new_cave(player, rng, harder_cave_difficulty),
+        world.new_cave(player, &mut context.rng, CaveDifficulty::Easy),
+        world.new_cave(player, &mut context.rng, harder_cave_difficulty),
     ];
-    caves.shuffle(rng); // Necessary so that the easy cave isn't always on the left and vice-versa
-    let choice = get_choice(
-        term,
-        "You approach two caves. Which do you enter?",
-        &["left", "right"],
+    caves.shuffle(&mut context.rng); // Necessary so that the easy cave isn't always on the left and vice-versa
+    let prompt = get_line!(context.hottext, "caves.approach");
+    // TODO: Ensure no name collisions
+    let (left, right) = (
+        get_line!(context.hottext, "caves.names"),
+        get_line!(context.hottext, "caves.names"),
     );
+    let cave_names: [&str; 2] = [&left, &right];
+    let choice = get_choice(context, &prompt, &cave_names);
     let cave = caves.remove(choice);
-    println!("You enter the left cave...");
+
+    context
+        .term
+        .write_line(&fmt_line!(
+            context.hottext,
+            "caves.enter",
+            cave = cave_names[choice]
+        ))
+        .unwrap();
 
     // Increment stats
     world.stats.caves += 1;
@@ -48,31 +51,56 @@ where
     let mut xp = 500; // Minimum cave XP
 
     if cave.monsters.is_empty() {
-        println!("Sweet, no monsters here!");
+        context
+            .term
+            .write_line(&get_line!(context.hottext, "combat.no-enemies"))
+            .unwrap();
     } else {
         for monster in cave.monsters {
-            println!("Uh oh, you encounter {}!", monster.name());
+            context
+                .term
+                .write_line(&fmt_line!(
+                    context.hottext,
+                    "combat.encounter",
+                    enemy = monster.name().as_str()
+                ))
+                .unwrap();
 
             // Roll for initiative
             let initiative =
                 ((player.level().max(1)) as f64 / monster.level() as f64).clamp(0.0, 1.0);
-            if rng.gen_bool(initiative) {
-                println!("You slay it before it has a chance to attack!");
+            if context.rng.gen_bool(initiative) {
+                context
+                    .term
+                    .write_line(get_line!(context.hottext, "combat.initiative").as_str())
+                    .unwrap();
             } else {
-                let damage = monster.damage(rng);
+                let damage = monster.damage(&mut context.rng);
                 let applied_damage = player.add_damage(damage, world);
-                println!("It attacks and you take {} damage!", applied_damage);
+                context
+                    .term
+                    .write_line(&fmt_line!(
+                        context.hottext,
+                        "combat.attacked",
+                        damage = applied_damage.commas().as_str()
+                    ))
+                    .unwrap();
 
                 // Attempt to heal
                 if let Some(potions_used) = player.auto_heal(world) {
                     for potion in potions_used {
-                        println!(
-                            "You used {}",
-                            world
-                                .get_item(&potion)
-                                .expect("Potion ID pulled directly from world.items")
-                                .name(),
-                        );
+                        context
+                            .term
+                            .write_line(&fmt_line!(
+                                context.hottext,
+                                "potion.use",
+                                damage = world
+                                    .get_item(&potion)
+                                    .expect("Potion ID pulled directly from world.items",)
+                                    .name()
+                                    .as_str()
+                            ))
+                            .unwrap();
                     }
                 }
                 if player.dead() {
@@ -100,12 +128,17 @@ pub fn show_cave_reward(
     world: &mut World,
     player: &mut Player,
     reward: CaveReward,
-    term: &mut Term,
+    context: &mut Context,
 ) {
     // Loot
     player.add_xp(reward.xp);
     player.add_gold(reward.gold);
-    println!("You got...");
+
+    context
+        .term
+        .write_line(&get_line!(context.hottext, "combat.reward"))
+        .unwrap();
+    // Generalize reward display
     println!("x{} xp", reward.xp.commas());
     println!("x{} gold", reward.gold.commas());
     reward.loot.into_iter().for_each(|(item, count)| {
@@ -121,10 +154,11 @@ pub fn show_cave_reward(
                 .name(),
         );
     });
-    wait_any_key(term);
+    // TODO: "You leveled up!"
+    wait_any_key(context);
 }
 
-pub fn show_status(world: &World, player: &Player, term: &mut Term) {
+pub fn show_status(world: &World, player: &Player, context: &mut Context) {
     println!(
         "Level {} ({} xp), {}/{} hp, {} gold, {} items, {} armor",
         player.level().commas(),
@@ -135,10 +169,10 @@ pub fn show_status(world: &World, player: &Player, term: &mut Term) {
         player.item_count().commas(),
         player.defense(world).commas(),
     );
-    wait_any_key(term);
+    wait_any_key(context);
 }
 
-pub fn show_inventory(world: &World, player: &Player, term: &mut Term) {
+pub fn show_inventory(world: &World, player: &Player, context: &mut Context) {
     let mut inventory = player
         .inventory()
         .iter()
@@ -154,6 +188,7 @@ pub fn show_inventory(world: &World, player: &Player, term: &mut Term) {
         })
         .collect::<Vec<(&str, u32)>>();
     inventory.sort_by_key(|e| e.1);
+    inventory.reverse();
 
     let show_item = |(name, count): (&str, u32)| {
         println!(
@@ -166,12 +201,18 @@ pub fn show_inventory(world: &World, player: &Player, term: &mut Term) {
     show_item(("gold", player.gold() as u32));
     inventory.into_iter().for_each(show_item);
 
-    wait_any_key(term);
+    wait_any_key(context);
 }
 
-pub fn show_death_screen(world: &World, player: &Player, term: &mut Term) {
-    println!("\nYou have died. Game over.");
-    println!("\nOver the course of your journey you encountered:");
+pub fn show_death_screen(world: &World, player: &Player, context: &mut Context) {
+    context
+        .term
+        .write_line(&get_line!(context.hottext, "combat.died"))
+        .unwrap();
+    context
+        .term
+        .write_line(&get_line!(context.hottext, "combat.game-over"))
+        .unwrap();
     println!(
         "{} caves, {} monsters, {} gold, and {} items.",
         (world.stats.caves / 2).commas(),
@@ -186,11 +227,16 @@ pub fn show_death_screen(world: &World, player: &Player, term: &mut Term) {
         player.net_worth(world).commas(),
     );
 
+    let prompt = get_line!(context.hottext, "interface.post-game-menu");
+    let choices: [&str; 3] = [
+        &get_line!(context.hottext, "interface.view-inventory"),
+        &get_line!(context.hottext, "interface.leaderboards"),
+        &get_line!(context.hottext, "interface.etxi"),
+    ];
     loop {
-        let choices = ["view inventory", "leaderboards", "exit"];
-        let choice_index = get_choice(term, "What do you want to do?", &choices);
+        let choice_index = get_choice(context, &prompt, &choices);
         match choice_index {
-            0 => show_inventory(world, player, term),
+            0 => show_inventory(world, player, context),
             1 => todo!(),
             _ => break,
         }
