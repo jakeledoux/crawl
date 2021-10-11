@@ -1,8 +1,11 @@
 use std::fmt::Display;
 use std::io::Write;
 
+use colored::*;
 use console::{Key, Term};
 use hottext::HotText;
+
+use crate::colors;
 
 pub trait Comma
 where
@@ -61,14 +64,13 @@ impl Default for Context {
 }
 
 /// Asks the user to type one of N choices.
-pub fn read_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
-    context
-        .term
+pub fn read_choice<'a>(ctx: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
+    ctx.term
         .write_line(&format!("{} ({})", prompt, choices.join(", ")))
         .unwrap();
     loop {
-        context.term.write_all(b"? ").unwrap();
-        if let Ok(mut input) = context.term.read_line() {
+        ctx.term.write_all(b"? ").unwrap();
+        if let Ok(mut input) = ctx.term.read_line() {
             input = input.trim().to_lowercase();
             if let Some(index) = choices.iter().position(|&option| option == input) {
                 break index;
@@ -79,24 +81,27 @@ pub fn read_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str])
 }
 
 /// Prompts the user with a menu to select one of N choices.
-pub fn get_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
-    context.term.write_line(prompt).unwrap();
+pub fn get_choice<'a>(ctx: &mut Context, prompt: &str, choices: &[&'a str]) -> usize {
+    ctx.term.write_line(prompt).unwrap();
 
     let mut selection = 0;
     let last_index = choices.len() - 1;
-    context.term.hide_cursor().unwrap();
+    ctx.term.hide_cursor().unwrap();
     loop {
         for (index, option) in choices.iter().enumerate() {
             let prefix = if index == selection { '>' } else { ' ' };
-            context
-                .term
-                .write_line(&format!("{} {}", prefix, option))
+            ctx.term
+                .write_line(
+                    &format!("{} {}", prefix, option)
+                        .color(colors::INPUT)
+                        .to_string(),
+                )
                 .unwrap();
         }
 
-        match context.term.read_key().unwrap() {
+        match ctx.term.read_key().unwrap() {
             Key::Enter | Key::Char('e') => {
-                context.term.show_cursor().unwrap();
+                ctx.term.show_cursor().unwrap();
                 break selection;
             }
             Key::ArrowUp | Key::Char('w') => selection = selection.saturating_sub(1),
@@ -105,17 +110,26 @@ pub fn get_choice<'a>(context: &mut Context, prompt: &str, choices: &[&'a str]) 
             Key::End => selection = last_index,
             _ => {}
         }
-        context.term.clear_last_lines(choices.len()).unwrap();
+        ctx.term.clear_last_lines(choices.len()).unwrap();
     }
 }
 
 /// Prompts the user to press any key to continue
-pub fn wait_any_key(context: &mut Context) {
-    context.term.hide_cursor().unwrap();
-    context
-        .term
-        .write_line("Press any key to continue...")
+pub fn wait_any_key(ctx: &mut Context) {
+    ctx.term.hide_cursor().unwrap();
+    ctx.term
+        .write_line(
+            "Press any key to continue..."
+                .color(colors::INPUT)
+                .to_string()
+                .as_ref(),
+        )
         .unwrap();
-    context.term.read_key().unwrap();
-    context.term.show_cursor().unwrap();
+    ctx.term.read_key().unwrap();
+    ctx.term.show_cursor().unwrap();
+}
+
+/// Inserts a blank line into stdout
+pub fn spacer(ctx: &mut Context) {
+    ctx.term.write_line("").unwrap();
 }

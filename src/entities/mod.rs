@@ -52,7 +52,7 @@ impl Rarity {
         }
     }
 
-    pub fn capped_random<R>(rng: &mut R, level: u32) -> Self
+    pub fn capped_random<R>(rng: &mut R, level: u64) -> Self
     where
         R: Rng,
     {
@@ -65,7 +65,7 @@ impl Rarity {
         }
     }
 
-    pub fn level_range(&self) -> Range<u32> {
+    pub fn level_range(&self) -> Range<u64> {
         match *self {
             Self::Petty => 1..10,
             Self::Common => 10..30,

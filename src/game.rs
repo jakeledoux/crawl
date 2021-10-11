@@ -1,10 +1,12 @@
 use std::collections::HashMap;
 
-use hottext::{fmt_line, get_line};
+use colored::*;
+use hottext::{fmt_line, get_line, get_lines};
 use rand::prelude::*;
 
 use super::entities::{player::Player, CaveDifficulty, World, *};
 use super::interface::*;
+use crate::colors;
 
 pub struct CaveReward {
     pub xp: u64,
@@ -17,30 +19,72 @@ pub enum CaveResult {
     Died,
 }
 
-pub fn enter_cave(world: &mut World, player: &mut Player, context: &mut Context) -> CaveResult {
+pub enum CaveSurvivedChoice {
+    ShowStatusReport,
+    Continue,
+}
+
+impl CaveSurvivedChoice {
+    /// Returns `true` if the cave_survived_choice is [`ShowStatusReport`].
+    pub fn is_show_status_report(&self) -> bool {
+        matches!(self, Self::ShowStatusReport)
+    }
+
+    /// Returns `true` if the cave_survived_choice is [`Continue`].
+    pub fn is_continue(&self) -> bool {
+        matches!(self, Self::Continue)
+    }
+}
+
+pub enum GameOverChoice {
+    Retry,
+    Quit,
+}
+
+impl GameOverChoice {
+    /// Returns `true` if the game_over_choice is [`Retry`].
+    pub fn is_retry(&self) -> bool {
+        matches!(self, Self::Retry)
+    }
+
+    /// Returns `true` if the game_over_choice is [`Quit`].
+    pub fn is_quit(&self) -> bool {
+        matches!(self, Self::Quit)
+    }
+}
+
+pub fn enter_cave(world: &mut World, player: &mut Player, ctx: &mut Context) -> CaveResult {
+    spacer(ctx);
+
     // Cave
-    let harder_cave_difficulty = CaveDifficulty::random(&mut context.rng);
+    let harder_cave_difficulty = CaveDifficulty::random(&mut ctx.rng);
     let mut caves = vec![
-        world.new_cave(player, &mut context.rng, CaveDifficulty::Easy),
-        world.new_cave(player, &mut context.rng, harder_cave_difficulty),
+        world.new_cave(player, &mut ctx.rng, CaveDifficulty::Easy),
+        world.new_cave(player, &mut ctx.rng, harder_cave_difficulty),
     ];
-    caves.shuffle(&mut context.rng); // Necessary so that the easy cave isn't always on the left and vice-versa
-    let prompt = get_line!(context.hottext, "caves.approach");
-    // TODO: Ensure no name collisions
-    let (left, right) = (
-        get_line!(context.hottext, "caves.names"),
-        get_line!(context.hottext, "caves.names"),
+    caves.shuffle(&mut ctx.rng); // Ensure random spacial distribution of hard caves
+    let prompt = get_line!(ctx.hottext, "caves.approach");
+    let cave_names = get_lines!(ctx.hottext, "caves.names")
+        .into_iter()
+        .choose_multiple(&mut ctx.rng, 2);
+    let choice = get_choice(
+        ctx,
+        &prompt,
+        &cave_names
+            .iter()
+            .map(|s| s.as_str())
+            .take(2)
+            .collect::<Vec<&str>>(),
     );
-    let cave_names: [&str; 2] = [&left, &right];
-    let choice = get_choice(context, &prompt, &cave_names);
     let cave = caves.remove(choice);
 
-    context
-        .term
+    spacer(ctx);
+
+    ctx.term
         .write_line(&fmt_line!(
-            context.hottext,
+            ctx.hottext,
             "caves.enter",
-            cave = cave_names[choice]
+            cave = cave_names[choice].as_str()
         ))
         .unwrap();
 
@@ -51,50 +95,85 @@ pub fn enter_cave(world: &mut World, player: &mut Player, context: &mut Context)
     let mut xp = 500; // Minimum cave XP
 
     if cave.monsters.is_empty() {
-        context
-            .term
-            .write_line(&get_line!(context.hottext, "combat.no-enemies"))
+        ctx.term
+            .write_line(&get_line!(ctx.hottext, "combat.no-enemies"))
             .unwrap();
     } else {
         for monster in cave.monsters {
-            context
-                .term
+            spacer(ctx);
+
+            ctx.term
                 .write_line(&fmt_line!(
-                    context.hottext,
-                    "combat.encounter",
-                    enemy = monster.name().as_str()
+                    ctx.hottext,
+                    if monster.is_difficult(player.level()) {
+                        "combat.encounter-hard"
+                    } else {
+                        "combat.encounter-easy"
+                    },
+                    enemy = monster.name().as_str(),
+                    enemy_article = monster.article_name().as_str(),
+                    enemy_proper = monster.proper_name().as_str()
                 ))
                 .unwrap();
 
             // Roll for initiative
             let initiative =
-                ((player.level().max(1)) as f64 / monster.level() as f64).clamp(0.0, 1.0);
-            if context.rng.gen_bool(initiative) {
-                context
-                    .term
-                    .write_line(get_line!(context.hottext, "combat.initiative").as_str())
+                ((player.level().max(1)) as f64 / (monster.level() * 2) as f64).clamp(0.0, 1.0);
+            if ctx.rng.gen_bool(initiative) {
+                ctx.term
+                    .write_line(
+                        fmt_line!(
+                            ctx.hottext,
+                            "combat.initiative",
+                            enemy = monster.name().as_str(),
+                            enemy_article = monster.article_name().as_str(),
+                            enemy_proper = monster.proper_name().as_str()
+                        )
+                        .as_str(),
+                    )
                     .unwrap();
             } else {
-                let damage = monster.damage(&mut context.rng);
+                // Monster drastically outclasses player
+                if monster.is_difficult(player.level()) {
+                    // Roll to escape
+                    if ctx.rng.gen_bool(0.20) {
+                        ctx.term
+                            .write_line(&fmt_line!(
+                                ctx.hottext,
+                                "combat.retreat",
+                                enemy = monster.name().as_str(),
+                                enemy_article = monster.article_name().as_str(),
+                                enemy_proper = monster.proper_name().as_str()
+                            ))
+                            .unwrap();
+                        continue;
+                    }
+                }
+
+                let damage = monster.damage(&mut ctx.rng);
                 let applied_damage = player.add_damage(damage, world);
-                context
-                    .term
+                let damage_str = format!("{} damage", applied_damage.commas())
+                    .color(colors::DAMAGE)
+                    .to_string();
+                ctx.term
                     .write_line(&fmt_line!(
-                        context.hottext,
+                        ctx.hottext,
                         "combat.attacked",
-                        damage = applied_damage.commas().as_str()
+                        damage = damage_str.as_str(),
+                        enemy = monster.name().as_str(),
+                        enemy_article = monster.article_name().as_str(),
+                        enemy_proper = monster.proper_name().as_str()
                     ))
                     .unwrap();
 
                 // Attempt to heal
                 if let Some(potions_used) = player.auto_heal(world) {
                     for potion in potions_used {
-                        context
-                            .term
+                        ctx.term
                             .write_line(&fmt_line!(
-                                context.hottext,
+                                ctx.hottext,
                                 "potion.use",
-                                damage = world
+                                potion = world
                                     .get_item(&potion)
                                     .expect("Potion ID pulled directly from world.items",)
                                     .name()
@@ -106,10 +185,31 @@ pub fn enter_cave(world: &mut World, player: &mut Player, context: &mut Context)
                 if player.dead() {
                     return CaveResult::Died;
                 } else {
-                    println!(
-                        "You power through the pain! ({} HP remaining)",
-                        player.hp().saturating_sub(player.damage()),
-                    );
+                    ctx.term
+                        .write_line(
+                            fmt_line!(
+                                ctx.hottext,
+                                "combat.player-turn",
+                                enemy = monster.name().as_str(),
+                                enemy_article = monster.article_name().as_str(),
+                                enemy_proper = monster.proper_name().as_str()
+                            )
+                            .as_str(),
+                        )
+                        .unwrap();
+
+                    ctx.term
+                        .write_line(
+                            fmt_line!(
+                                ctx.hottext,
+                                "combat.survived",
+                                enemy = monster.name().as_str(),
+                                enemy_article = monster.article_name().as_str(),
+                                enemy_proper = monster.proper_name().as_str()
+                            )
+                            .as_str(),
+                        )
+                        .unwrap();
                     xp += monster.level() as u64 * 20
                 }
             }
@@ -128,37 +228,65 @@ pub fn show_cave_reward(
     world: &mut World,
     player: &mut Player,
     reward: CaveReward,
-    context: &mut Context,
-) {
+    ctx: &mut Context,
+) -> CaveSurvivedChoice {
+    spacer(ctx);
+
     // Loot
     player.add_xp(reward.xp);
     player.add_gold(reward.gold);
 
-    context
-        .term
-        .write_line(&get_line!(context.hottext, "combat.reward"))
+    ctx.term
+        .write_line(&get_line!(ctx.hottext, "combat.reward"))
         .unwrap();
-    // Generalize reward display
-    println!("x{} xp", reward.xp.commas());
-    println!("x{} gold", reward.gold.commas());
-    reward.loot.into_iter().for_each(|(item, count)| {
+
+    let xp_length = reward.xp.commas().len();
+    let show_item = |(name, count): (&str, u32)| {
+        let count_str = format!("x{:<width$} -", count.commas(), width = xp_length)
+            .color(colors::LOW_PRIORITY)
+            .to_string();
+        println!("{} {}", count_str, name);
+    };
+    show_item((
+        "xp".color(colors::XP).to_string().as_ref(),
+        reward.xp as u32,
+    ));
+    show_item((
+        "gold".color(colors::GOLD).to_string().as_ref(),
+        reward.gold as u32,
+    ));
+    for (item, count) in reward.loot {
         for _ in 0..count {
             player.add_item(&item);
         }
-        println!(
-            "x{} {}",
-            count,
+        show_item((
             world
                 .get_item(&item)
                 .expect("world.items should not have mutated")
-                .name(),
-        );
-    });
+                .name()
+                .as_ref(),
+            count,
+        ));
+    }
     // TODO: "You leveled up!"
-    wait_any_key(context);
+
+    spacer(ctx);
+
+    let prompt = get_line!(ctx.hottext, "interface.generic-menu");
+    let choices: [&str; 2] = [
+        &get_line!(ctx.hottext, "interface.next-cave"),
+        &get_line!(ctx.hottext, "interface.show-status"),
+    ];
+    let choice_index = get_choice(ctx, &prompt, &choices);
+    match choice_index {
+        0 => CaveSurvivedChoice::Continue,
+        _ => CaveSurvivedChoice::ShowStatusReport,
+    }
 }
 
-pub fn show_status(world: &World, player: &Player, context: &mut Context) {
+pub fn show_status(world: &World, player: &Player, ctx: &mut Context) {
+    spacer(ctx);
+
     println!(
         "Level {} ({} xp), {}/{} hp, {} gold, {} items, {} armor",
         player.level().commas(),
@@ -169,10 +297,12 @@ pub fn show_status(world: &World, player: &Player, context: &mut Context) {
         player.item_count().commas(),
         player.defense(world).commas(),
     );
-    wait_any_key(context);
+    wait_any_key(ctx);
 }
 
-pub fn show_inventory(world: &World, player: &Player, context: &mut Context) {
+pub fn show_inventory(world: &World, player: &Player, ctx: &mut Context) {
+    spacer(ctx);
+
     let mut inventory = player
         .inventory()
         .iter()
@@ -181,37 +311,41 @@ pub fn show_inventory(world: &World, player: &Player, context: &mut Context) {
                 world
                     .get_item(item)
                     .expect("world.items should not have mutated")
-                    .name()
-                    .as_ref(),
+                    .name(),
                 *count,
             )
         })
-        .collect::<Vec<(&str, u32)>>();
+        .collect::<Vec<(String, u32)>>();
     inventory.sort_by_key(|e| e.1);
     inventory.reverse();
 
     let show_item = |(name, count): (&str, u32)| {
-        println!(
-            "x{:<width$} - {}",
+        let count_str = format!(
+            "x{:<width$} -",
             count.commas(),
-            name,
             width = player.gold().commas().len()
-        );
+        )
+        .color(colors::LOW_PRIORITY)
+        .to_string();
+        println!("{} {}", count_str, name);
     };
-    show_item(("gold", player.gold() as u32));
-    inventory.into_iter().for_each(show_item);
-
-    wait_any_key(context);
+    show_item((
+        "gold".color(colors::GOLD).to_string().as_ref(),
+        player.gold() as u32,
+    ));
+    inventory
+        .into_iter()
+        .for_each(|(name, count)| show_item((&name, count)));
 }
 
-pub fn show_death_screen(world: &World, player: &Player, context: &mut Context) {
-    context
-        .term
-        .write_line(&get_line!(context.hottext, "combat.died"))
+pub fn show_death_screen(world: &World, player: &Player, ctx: &mut Context) -> GameOverChoice {
+    spacer(ctx);
+
+    ctx.term
+        .write_line(&get_line!(ctx.hottext, "combat.died"))
         .unwrap();
-    context
-        .term
-        .write_line(&get_line!(context.hottext, "combat.game-over"))
+    ctx.term
+        .write_line(&get_line!(ctx.hottext, "combat.game-over"))
         .unwrap();
     println!(
         "{} caves, {} monsters, {} gold, and {} items.",
@@ -227,18 +361,22 @@ pub fn show_death_screen(world: &World, player: &Player, context: &mut Context) 
         player.net_worth(world).commas(),
     );
 
-    let prompt = get_line!(context.hottext, "interface.post-game-menu");
-    let choices: [&str; 3] = [
-        &get_line!(context.hottext, "interface.view-inventory"),
-        &get_line!(context.hottext, "interface.leaderboards"),
-        &get_line!(context.hottext, "interface.etxi"),
+    let prompt = get_line!(ctx.hottext, "interface.generic-menu");
+    let choices: [&str; 4] = [
+        &get_line!(ctx.hottext, "interface.retry"),
+        &get_line!(ctx.hottext, "interface.view-inventory"),
+        &get_line!(ctx.hottext, "interface.leaderboards"),
+        &get_line!(ctx.hottext, "interface.quit"),
     ];
     loop {
-        let choice_index = get_choice(context, &prompt, &choices);
+        spacer(ctx);
+
+        let choice_index = get_choice(ctx, &prompt, &choices);
         match choice_index {
-            0 => show_inventory(world, player, context),
-            1 => todo!(),
-            _ => break,
+            0 => break GameOverChoice::Retry,
+            1 => show_inventory(world, player, ctx),
+            2 => todo!(),
+            _ => break GameOverChoice::Quit,
         }
     }
 }

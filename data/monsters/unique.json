@@ -2,12 +2,13 @@
     {
         "id": "thomas-train",
         "name": "Thomas the Train Engine",
+        "proper_noun": true,
         "generic": false,
         "rarity": "rare"
     },
     {
         "id": "demogorgon",
-        "name": "The Demogorgon",
+        "name": "Demogorgon",
         "generic": false,
         "rarity": "rare"
     },

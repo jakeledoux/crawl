@@ -1,6 +1,8 @@
+use colored::*;
 use serde::Deserialize;
 
 use super::*;
+use crate::colors;
 
 #[derive(Deserialize, Clone, Copy, PartialEq, Eq, Hash)]
 #[serde(rename_all = "lowercase")]
@@ -38,8 +40,8 @@ impl Item {
         &self.id
     }
 
-    pub fn name(&self) -> &String {
-        &self.name
+    pub fn name(&self) -> String {
+        self.name.color(colors::ITEM).to_string()
     }
 
     pub fn value(&self) -> u64 {
