@@ -9,3 +9,5 @@ baddies. Rinse and repeat.
 
 This game's so lazy that I didn't even write most of the content, and instead
 pre-generated it with OpenAI's GPT-3 and Codex models.
+
+[![asciicast](https://asciinema.org/a/UbreCz6p0fyjMA9K7UkOQF9Wj.svg)](https://asciinema.org/a/UbreCz6p0fyjMA9K7UkOQF9Wj)
