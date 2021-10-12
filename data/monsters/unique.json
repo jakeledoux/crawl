@@ -7,15 +7,38 @@
         "rarity": "rare"
     },
     {
-        "id": "demogorgon",
-        "name": "Demogorgon",
+        "id": "alduin",
+        "name": "Alduin",
+        "proper_noun": true,
         "generic": false,
         "rarity": "rare"
     },
     {
-        "id": "draugr-deathlord",
-        "name": "Draugr Deathlord",
+        "id": "jake-state-farm",
+        "name": "Jake From State Farm",
+        "proper_noun": true,
         "generic": false,
         "rarity": "uncommon"
+    },
+    {
+        "id": "terminator",
+        "name": "Terminator",
+        "proper_noun": false,
+        "generic": false,
+        "rarity": "rare"
+    },
+    {
+        "id": "liberty-prime",
+        "name": "Liberty Prime",
+        "proper_noun": true,
+        "generic": false,
+        "rarity": "uncommon"
+    },
+    {
+        "id": "optimus-prime",
+        "name": "Optimus Prime",
+        "proper_noun": true,
+        "generic": false,
+        "rarity": "rare"
     }
 ]

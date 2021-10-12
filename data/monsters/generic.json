@@ -88,5 +88,123 @@
         "id": "mammoth",
         "name": "Mammoth",
         "generic": true
+    },
+    {
+        "id": "demon",
+        "name": "Demon",
+        "generic": true
+    },
+    {
+        "id": "goblin",
+        "name": "Goblin",
+        "generic": true
+    },
+    {
+        "id": "zombie",
+        "name": "Zombie",
+        "generic": true,
+        "max-level": 25
+    },
+    {
+        "id": "vampire",
+        "name": "Vampire",
+        "generic": true,
+        "max-level": 35
+    },
+    {
+        "id": "werewolf",
+        "name": "Werewolf",
+        "generic": true,
+        "max-level": 25
+    },
+    {
+        "id": "mad-scientist",
+        "name": "Mad Scientist",
+        "generic": true,
+        "max-level": 15
+    },
+    {
+        "id": "Thief",
+        "name": "Thief",
+        "generic": true,
+        "max-level": 10
+    },
+    {
+        "id": "swordsman",
+        "name": "Swordsman",
+        "generic": true,
+        "max-level": 15
+    },
+    {
+        "id": "battlemage",
+        "name": "Battlemage",
+        "generic": true,
+        "max-level": 25
+    },
+    {
+        "id": "giant-crab",
+        "name": "Giant Crab",
+        "generic": true,
+        "max-level": 5
+    },
+    {
+        "id": "death-hound",
+        "name": "Death Hound",
+        "generic": true,
+        "max-level": 35
+    },
+    {
+        "id": "ogre",
+        "name": "Ogre",
+        "generic": true,
+        "max-level": 25
+    },
+    {
+        "id": "angel-of-death",
+        "name": "Angel of Death",
+        "generic": true,
+        "max-level": 45
+    },
+    {
+        "id": "giant-rat",
+        "name": "Giant Rat",
+        "generic": true,
+        "max-level": 10
+    },
+    {
+        "id": "demogorgon",
+        "name": "Demogorgon",
+        "generic": true,
+        "rarity": "rare"
+    },
+    {
+        "id": "draugr-deathlord",
+        "name": "Draugr Deathlord",
+        "generic": true,
+        "rarity": "uncommon"
+    },
+    {
+        "id": "deathclaw",
+        "name": "Deathclaw",
+        "generic": true,
+        "rarity": "uncommon"
+    },
+    {
+        "id": "mindflayer",
+        "name": "Mindflayer",
+        "generic": true,
+        "rarity": "rare"
+    },
+    {
+        "id": "trex",
+        "name": "Tyrannosaurus Rex",
+        "generic": true,
+        "rarity": "uncommon"
+    },
+    {
+        "id": "velociraptor",
+        "name": "Velociraptor",
+        "generic": true,
+        "rarity": "uncommon"
     }
 ]
