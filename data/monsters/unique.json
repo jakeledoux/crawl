@@ -40,5 +40,26 @@
         "proper_noun": true,
         "generic": false,
         "rarity": "rare"
+    },
+    {
+        "id": "agent-smith",
+        "name": "Agent Smith",
+        "proper_noun": true,
+        "generic": false,
+        "rarity": "rare"
+    },
+    {
+        "id": "neo",
+        "name": "Neo",
+        "proper_noun": true,
+        "generic": false,
+        "rarity": "legendary"
+    },
+    {
+        "id": "gandalf",
+        "name": "Gandalf",
+        "proper_noun": true,
+        "generic": false,
+        "rarity": "legendary"
     }
 ]
