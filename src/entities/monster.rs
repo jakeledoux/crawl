@@ -76,7 +76,7 @@ impl Monster {
                 Rarity::Legendary => format!("a {}", self.name()),
             }
         } else {
-            format!("The {}", self.colored_raw_name())
+            self.proper_name()
         }
     }
 
