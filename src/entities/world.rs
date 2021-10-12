@@ -72,6 +72,11 @@ impl World {
         Self::default()
     }
 
+    // Reset world for a new game
+    pub fn reset(&mut self) {
+        self.stats = Stats::default();
+    }
+
     pub fn items(&self) -> &HashMap<String, Item> {
         &self.items
     }

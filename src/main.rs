@@ -35,9 +35,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         .with_load_items("./data/items/collectibles.json")?
         .with_load_items("./data/items/potions.json")?
         .with_load_items("./data/items/weapons.json")?;
-    let mut player = Player::default();
 
     loop {
+        // Reset world and player for a new game
+        world.reset();
+        let mut player = Player::default();
+
         loop {
             let result = game::enter_cave(&mut world, &mut player, &mut ctx);
             if let game::CaveResult::Survived { reward } = result {
