@@ -1,15 +1,15 @@
 {
-    "lingo.experience": ["xp"],
-    "lingo.gold": ["gold"],
+    "lingo.experience": ["pirate xp"],
+    "lingo.gold": ["doubloons"],
     "interface.type-prompt": ["? "],
-    "interface.invalid-choice": ["That's not a valid choice."],
-    "interface.show-status": ["show status"],
-    "interface.next-cave": ["continue to next cave"],
-    "interface.view-inventory": ["view inventory"],
-    "interface.leaderboards": ["leaderboards"],
+    "interface.invalid-choice": ["That ain't a valid choice."],
+    "interface.show-status": ["show ye situation"],
+    "interface.next-cave": ["keep a'sailing"],
+    "interface.view-inventory": ["view yer bag"],
+    "interface.leaderboards": ["pirate leaderboards"],
     "interface.retry": ["play again"],
-    "interface.quit": ["quit"],
-    "interface.generic-menu": ["What do you want to do?"],
+    "interface.quit": ["walk the plank"],
+    "interface.generic-menu": ["What'll ye be doin now?"],
     "caves.names": [
         "Blairlock's Den",
         "The Old Mines",
@@ -41,28 +41,28 @@
         "Resting Place of the Old Gods",
         "The Hidden Falls"
     ],
-    "caves.approach": ["You approach two caves. Which do you enter?"],
-    "caves.enter": ["You enter {{{cave}}}..."],
+    "caves.approach": ["Ye be approaching two caves. Which do ye enter?"],
+    "caves.enter": ["Ye be entering {{{cave}}}..."],
     "combat.no-enemies": [
-        "Sweet, no monsters here!",
-        "Looks like a peaceful place.",
+        "Ho! There be no critters about!",
+        "This be a very peaceful place.",
         "No enemies in sight!",
-        "There's no one here, this loot is mine for the taking!",
-        "Thank the gods, no one is here!",
-        "Hey, look at that! There's no enemies here!",
-        "I guess this is my chance to pick up some easy loot!",
-        "I think I'm alone here.",
-        "Oh, good. No one is here.",
-        "My luck just keeps getting better and better!",
-        "I'm alone... So I can do whatever I want!",
-        "It's so quiet around here."
+        "Ahoy, matey! This booty be mine fer the takin!",
+        "Pleasure doin' business.",
+        "No enemies a'comin'.",
+        "I be thinkin' this be my chance to pick up some easy plunder!",
+        "The odds be in me favor.",
+        "Looks like me luck's got a change of direction.",
+        "No one be around.",
+        "I be thinkin' I'm alone here."
     ],
     "combat.encounter-easy": [
-        "Here we go! {{{enemy}}} inbound!",
-        "Ha! {{{enemy_article}}}? Is that the best you've got?",
-        "This {{{enemy}}} should be no match for me!",
-        "{{{enemy_article}}}? This should be easy.",
-        "{{{enemy_article}}}? Its gold is as good as mine!"
+        "Here we be goin'! {{{enemy}}} on the port bow!",
+        "Ha! Ye be trying to best ol' {{{enemy}}}? How's that work out fer ye?",
+        "This {{{enemy}}} be no match fer me ol' trusty blunderbuss.",
+        "{{{enemy_article}}}? Ye think that be enough to best me? Ha!",
+        "{{{enemy_article}}}? I'll take that as a win.",
+        "{{{enemy_article}}}? Ye stand no chance!"
     ],
     "combat.encounter-hard": [
         "Uh oh, it's {{{enemy_article}}}!",
@@ -140,8 +140,8 @@
         "You deliver a fatal blow to {{{enemy_proper}}}. As it dies, it gasps and utters a last curse at you.",
         "You deliver a fatal blow to {{{enemy_proper}}}. You watch as {{{enemy_proper}}} slowly dies in front of you, a permanent look of fear carved into its face."
     ],
-    "combat.reward": ["You got..."],
-    "potion.use": ["You used your {{{potion}}}."],
-    "combat.died": ["You have died."],
-    "combat.game-over": ["Game over."]
+    "combat.reward": ["Ye got..."],
+    "potion.use": ["Ye used yer {{{potion}}}."],
+    "combat.died": ["Ye be dancin; the hempen jig.", "Ye be explorin' Davy Jones' locker."],
+    "combat.game-over": ["Blimey, that be the end."]
 }

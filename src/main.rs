@@ -1,5 +1,7 @@
 use std::error::Error;
 
+use clap::Clap;
+
 pub mod colors {
     use colored::*;
 
@@ -23,9 +25,20 @@ pub mod interface;
 
 use entities::{player::Player, World};
 
+#[derive(Clap)]
+#[clap(version = "0.1.0", author = "Jake Ledoux <me@jakeledoux.com>")]
+struct Opts {
+    #[clap(short, long, default_value = "en-US", possible_values = &["en-US", "en-PR"])]
+    locale: String,
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
+    let opts = Opts::parse();
+
     let mut ctx = interface::Context::default();
-    ctx.hottext.load_json("./data/localization/en-us.json")?;
+    ctx.hottext
+        .load_json(format!("./data/localization/{}.json", opts.locale))
+        .expect("No localization file exists for given locale.");
 
     let mut world = World::new()
         .with_load_monsters("./data/monsters/generic.json")?

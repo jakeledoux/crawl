@@ -12,3 +12,4 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 hottext = { git = "https://github.com/jakeledoux/hottext" }
 colored = "2.0.0"
+clap = "3.0.0-beta"
